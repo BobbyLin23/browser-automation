@@ -1,66 +1,69 @@
 {
-	"formatter": "language_server",
-	"format_on_save": "on",
-	"lsp": {
-		"biome": {
-			"settings": {
-				"require_config_file": true
-			}
-		}
-	},
-	"languages": {
-		"JavaScript": {
-			"language_servers": ["biome", "!eslint", "..."],
-			"formatter": {
-				"language_server": {
-					"name": "biome"
-				}
-			}
-		},
-		"TypeScript": {
-			"language_servers": ["biome", "!eslint", "..."],
-			"formatter": {
-				"language_server": {
-					"name": "biome"
-				}
-			},
-			"code_actions_on_format": {
-				"source.fixAll.biome": true,
-				"source.organizeImports.biome": true
-			}
-		},
-		"JSON": {
-			"language_servers": ["biome", "..."],
-			"formatter": {
-				"language_server": {
-					"name": "biome"
-				}
-			}
-		},
-		"JSONC": {
-			"language_servers": ["biome", "..."],
-			"formatter": {
-				"language_server": {
-					"name": "biome"
-				}
-			}
-		},
-		"CSS": {
-			"language_servers": ["biome", "..."],
-			"formatter": {
-				"language_server": {
-					"name": "biome"
-				}
-			}
-		},
-		"Svelte": {
-			"language_servers": ["svelte-language-server", "biome", "!eslint", "..."],
-			"formatter": {
-				"language_server": {
-					"name": "biome"
-				}
-			},
-			"code_actions_on_format": {}
-		}
-	}
+  "formatter": "language_server",
+  "format_on_save": "on",
+  "lsp": {
+    "biome": {
+      "settings": {
+        "require_config_file": true
+      }
+    }
+  },
+  "languages": {
+    "JavaScript": {
+      "language_servers": ["biome", "!eslint", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "TypeScript": {
+      "language_servers": ["biome", "!eslint", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "JSON": {
+      "language_servers": ["biome", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "JSONC": {
+      "language_servers": ["biome", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "CSS": {
+      "language_servers": ["biome", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "Svelte": {
+      "language_servers": ["svelte-language-server", "biome", "!eslint", "..."],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    }
+  }
 }
