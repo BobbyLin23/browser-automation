@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { UserButton } from 'svelte-clerk';
   import { toast } from 'svelte-sonner';
   import { Button } from '#lib/components/ui/button/index.js';
 </script>
@@ -15,3 +16,4 @@
 >
   Click
 </Button>
+<UserButton />

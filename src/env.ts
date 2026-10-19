@@ -5,6 +5,7 @@ export const variables = defineEnvVars({
   CLERK_SECRET_KEY: {},
   PUBLIC_CLERK_SIGN_IN_URL: { public: true },
   PUBLIC_CLERK_SIGN_UP_URL: { public: true },
+  PUBLIC_CLERK_AFTER_SIGN_OUT_URL: { public: true },
   PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: { public: true },
   PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: { public: true }
 });
