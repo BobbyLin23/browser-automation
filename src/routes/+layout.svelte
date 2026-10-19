@@ -5,7 +5,10 @@
   import { ClerkProvider } from 'svelte-clerk';
   import favicon from '#lib/assets/favicon.svg';
   import { Toaster } from '#lib/components/ui/sonner/index.js';
-  import { PUBLIC_CLERK_AFTER_SIGN_OUT_URL } from '$app/env/public';
+  import {
+    PUBLIC_CLERK_AFTER_SIGN_OUT_URL,
+    PUBLIC_CLERK_TASK_CHOOSE_ORGANIZATION_URL
+  } from '$app/env/public';
   import type { LayoutProps } from './$types';
 
   let { children, data }: LayoutProps = $props();
@@ -18,6 +21,7 @@
 <ClerkProvider
   {...data}
   afterSignOutUrl={PUBLIC_CLERK_AFTER_SIGN_OUT_URL}
+  taskUrls={{ 'choose-organization': PUBLIC_CLERK_TASK_CHOOSE_ORGANIZATION_URL }}
   appearance={{ theme: shadcn }}
 >
   <ModeWatcher />
