@@ -2,6 +2,8 @@
   import RiAddLine from 'remixicon-svelte/icons/add-line';
   import RiFlowChart from 'remixicon-svelte/icons/flow-chart';
   import { OrganizationSwitcher, UserButton } from 'svelte-clerk';
+  import { Popover, PopoverContent, PopoverTrigger } from '#lib/components/ui/popover/index.js';
+  import { Separator } from '#lib/components/ui/separator/index.js';
   import {
     Sidebar,
     SidebarContent,
@@ -14,7 +16,8 @@
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarTrigger
+    SidebarTrigger,
+    useSidebar
   } from '#lib/components/ui/sidebar/index.js';
 
   const workflows = [
@@ -30,7 +33,82 @@
   ];
 
   let activeWorkflow = $state(workflows[0]);
+
+  const sidebar = useSidebar();
 </script>
+
+{#snippet WorkflowNav()}
+  {#if sidebar.state === 'collapsed'}
+    <SidebarGroup>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <Popover>
+              <PopoverTrigger>
+                {#snippet child({
+                  props
+                })}
+                  <SidebarMenuButton {...props} size="lg" class="justify-center">
+                    <RiFlowChart />
+                    <span class="sr-only">Workflows</span>
+                  </SidebarMenuButton>
+                {/snippet}
+              </PopoverTrigger>
+              <PopoverContent side="right" align="start" class="p-1">
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <RiAddLine />
+                      <span>New workflow</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+                <Separator />
+                <SidebarMenu>
+                  {#each workflows as workflow (workflow)}
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        isActive={activeWorkflow === workflow}
+                        onclick={() => (activeWorkflow = workflow)}
+                      >
+                        <span>{workflow}</span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  {/each}
+                </SidebarMenu>
+              </PopoverContent>
+            </Popover>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  {:else}
+    <SidebarGroup>
+      <SidebarGroupLabel>Workflows</SidebarGroupLabel>
+      <SidebarGroupAction title="New workflow">
+        <RiAddLine />
+        <span class="sr-only">New workflow</span>
+      </SidebarGroupAction>
+      <SidebarGroupContent>
+        <SidebarMenu class="gap-1">
+          {#each workflows as workflow (workflow)}
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                size="lg"
+                class="h-10 p-1"
+                isActive={activeWorkflow === workflow}
+                tooltipContent={workflow}
+                onclick={() => (activeWorkflow = workflow)}
+              >
+                <span>{workflow}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          {/each}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  {/if}
+{/snippet}
 
 <Sidebar collapsible="icon">
   <SidebarHeader>
@@ -50,33 +128,7 @@
     </div>
   </SidebarHeader>
 
-  <SidebarContent>
-    <SidebarGroup>
-      <SidebarGroupLabel>Workflows</SidebarGroupLabel>
-      <SidebarGroupAction title="New workflow">
-        <RiAddLine />
-        <span class="sr-only">New workflow</span>
-      </SidebarGroupAction>
-      <SidebarGroupContent>
-        <SidebarMenu class="gap-1">
-          {#each workflows as workflow (workflow)}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                size="lg"
-                class="h-10 group-data-[collapsible=icon]:justify-center"
-                isActive={activeWorkflow === workflow}
-                tooltipContent={workflow}
-                onclick={() => (activeWorkflow = workflow)}
-              >
-                <RiFlowChart class="hidden group-data-[collapsible=icon]:block" />
-                <span class="group-data-[collapsible=icon]:hidden">{workflow}</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          {/each}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
-  </SidebarContent>
+  <SidebarContent> {@render WorkflowNav()} </SidebarContent>
 
   <SidebarFooter class="group-data-[collapsible=icon]:p-1">
     <div
